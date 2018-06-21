@@ -1,0 +1,22 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a style="cursor: pointer;" class="navbar-brand">BMS</a>
+    </div>
+
+    
+
+    <ul class="nav navbar-nav navbar-right">
+      <ng-template [ngIf]="!authService.isAuthenticated()">
+        <li routerLinkActive="active"><a routerLink="/signup">Register</a></li>
+        <li routerLinkActive="active"><a routerLink="/signin">Sign-in</a></li>
+    </ng-template>
+    <li routerLinkActive="active" *ngIf="authService.isAuthenticated()">
+      <a style="cursor: pointer;" (click)="onlogout()">Logout</a>
+    </li>
+
+      </ul>
+  </div>
+ </nav>
+
+

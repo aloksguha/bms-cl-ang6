@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-success" (click)="onclickNewWorker()">New Worker</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <app-worker-card  *ngFor="let workerEl of homeworkers" 
+    [homeworker]="workerEl"></app-worker-card>
+  </div>
+</div>

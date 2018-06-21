@@ -1,0 +1,59 @@
+
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset1 col-md-offset2">
+          <form name="form" (ngSubmit)="onAddWorker(f)" #f="ngForm" novalidate>
+              <legend>New Worker</legend>
+              <div class="form-group">
+                  <label for="email">Name</label>
+                  <input type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid}" required />
+                  <div *ngIf="f.submitted && name.invalid" class="app-error">
+                      <div *ngIf="name.errors.required">Name is required</div>
+                  </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email">JobType</label>
+                <input type="text" class="form-control" name="jobtype" [(ngModel)]="model.jobtype" #jobtype="ngModel" [ngClass]="{ 'is-invalid': f.submitted && jobtype.invalid}" required />
+                <div *ngIf="f.submitted && jobtype.invalid" class="app-error">
+                    <div *ngIf="jobtype.errors.required">Job Type is required</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Start Date</label>
+              <input type="date" class="form-control" name="startdt" [(ngModel)]="model.startdt" #startdt="ngModel" [ngClass]="{ 'is-invalid': f.submitted && startdt.invalid}" required />
+              <div *ngIf="f.submitted && startdt.invalid" class="app-error">
+                  <div *ngIf="startdt.errors.required">Start Date is required</div>
+              </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="email">Monthly Wages</label>
+            <input type="text" class="form-control" name="wages" [(ngModel)]="model.wages" #wages="ngModel" [ngClass]="{ 'is-invalid': f.submitted && wages.invalid}" required />
+            <div *ngIf="f.submitted && wages.invalid" class="app-error">
+                <div *ngIf="wages.errors.required">Monthly Wages is required</div>
+            </div>
+        </div>
+
+
+              <!-- <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" />
+                <div *ngIf="f.submitted && password.invalid" class="app-error">
+                    <div *ngIf="password.errors.required">Password is required</div>
+                    <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+            </div> -->
+  
+              <div class="form-group">
+                  <button class="btn btn-primary" type="submit" class="btn btn-success">Register</button>
+                  <button class="btn btn-primary" type="button" class="btn btn-info" (click)="onCancel()">Cancel</button>
+                  <!-- <button class="btn btn-primary" type="button" class="btn btn-info" (click)="get()">Get </button> -->
+              </div>
+            </form>
+      </div>
+    </div>
+  </div>
+  
