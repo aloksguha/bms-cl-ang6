@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Input, OnDestroy } from '@angular/core';
 import { WorkerService } from '../../worker.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -10,7 +10,8 @@ import { DataStorageService } from '../../../shared/datastorage.service';
   templateUrl: './worker-event-add.component.html',
   styleUrls: ['./worker-event-add.component.css']
 })
-export class WorkerEventAddComponent implements OnInit{
+export class WorkerEventAddComponent implements OnInit, AfterViewInit, OnDestroy{
+  @Input() onDate;
   @ViewChild('f') slForm: NgForm;
   eventData : any;
   constructor(private service: WorkerService,
@@ -18,18 +19,26 @@ export class WorkerEventAddComponent implements OnInit{
     private route : ActivatedRoute,
     private dataService : DataStorageService) { }
 
+    ngOnDestroy(){
+      console.log('WorkerEventAddComponent destroyed..');
+    }
+    ngAfterViewInit(){
+      //this.initForm();
+    }
     ngOnInit() {
-      this.service.selectedDate.subscribe(
-        (data:any) => {
-          console.log(data);
-          this.eventData = data;
-          this.initForm();
-        });
+      console.log(this.onDate)
+      
+      // this.service.selectedDate.subscribe(
+      //   (data:any) => {
+      //     console.log(data);
+      //     this.eventData = data;
+      //     this.initForm();
+      //   });
   }
 
   initForm(){
       this.slForm.setValue({
-        dt : this.eventData.day.date,
+        dt : this.onDate,
         attdn : "true"
       });
   }

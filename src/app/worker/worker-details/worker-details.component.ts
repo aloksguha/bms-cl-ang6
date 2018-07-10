@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy, Input } from '@angular/core';
 import { CalendarEvent } from 'calendar-utils';
 import {
   startOfDay,
@@ -18,7 +18,7 @@ import { Title } from '@angular/platform-browser';
 import { Subject, Subscription, Observable, BehaviorSubject } from 'rxjs';
 import { map, startWith, take } from 'rxjs/operators';
 import { DataStorageService } from '../../shared/datastorage.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 const colors: any = {
   red: {
@@ -54,6 +54,8 @@ export class WorkerDetailsComponent implements OnInit, OnDestroy {
   localeventSubject = new BehaviorSubject<any>([]);
   events$: Observable<Array<CalendarEvent<any>>>;
   activeDayIsOpen = false;
+  eventsOnDay : any[] = [];
+  selectedDate;
 
   sample: any = {
     title: 'Present',
@@ -68,7 +70,7 @@ export class WorkerDetailsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private dataService: DataStorageService,
-    private modal: NgbModal) { }
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     console.log('initializing detail component')
@@ -102,34 +104,41 @@ export class WorkerDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  onDayClick({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (events.length > 0 && isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-        this.viewDate = date;
-      }
-    }
+  openModel(content){
+    console.log('clicked');
+    this.modalService.open(content);
+
+
+  }
+
+  onDayClick({ date, events }: { date: Date; events: CalendarEvent[] }, content: any): void {
+    console.log(date);
+    console.log(events);
+    console.log(content);
+    this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
+    this.eventsOnDay = events;
+    this.selectedDate = date;
+    // if (events.length > 0 && isSameMonth(date, this.viewDate)) {
+    //   if (
+    //     (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+    //     events.length === 0
+    //   ) {
+    //     this.activeDayIsOpen = false;
+    //   } else {
+    //     this.activeDayIsOpen = true;
+    //     this.viewDate = date;
+    //   }
+    // }
   }
 
 
-  // onDayClick(data: any) {
-  //   console.log(data);
-  //   data['selectedWorker'] = this.id;
-  //   this.service.selectedDate.next(data);
-  //   this.router.navigate(['add'], { relativeTo: this.route });
 
-  // }
 
   eventClicked(data: any) {
-    console.log(data.event.id);
-    data['selectedWorker'] = this.id;
-    this.service.selectedDate.next(data);
-    this.router.navigate([data.event.id, 'edit'], { relativeTo: this.route });
+    // console.log(data.event.id);
+    // data['selectedWorker'] = this.id;
+    // this.service.selectedDate.next(data);
+    // this.router.navigate([data.event.id, 'edit'], { relativeTo: this.route });
   }
 
   ngOnDestroy() {
@@ -137,3 +146,4 @@ export class WorkerDetailsComponent implements OnInit, OnDestroy {
     this.paramSubscription.unsubscribe();
   }
 }
+

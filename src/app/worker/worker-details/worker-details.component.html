@@ -1,3 +1,20 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Events on {{selectedDate | date }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div *ngFor="let evnt of eventsOnDay">
+        {{evnt.id}} {{evnt.title}}
+      </div>
+      <!-- <app-worker-event-add onDate="selectedDate"></app-worker-event-add> -->
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+  </div>
+</ng-template>
 
 <div class="row text-center">
   <div class="col-md-4">
@@ -70,7 +87,7 @@
       [viewDate]="viewDate"
       [events]="events"
       [activeDayIsOpen]="activeDayIsOpen"
-      (dayClicked)="onDayClick($event.day)"
+      (dayClicked)="onDayClick($event.day, content)"
       (eventClicked)="eventClicked($event)">
     </mwl-calendar-month-view>
     <mwl-calendar-week-view

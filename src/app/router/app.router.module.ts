@@ -8,6 +8,7 @@ import { WorkerDetailsComponent } from "../worker/worker-details/worker-details.
 import { WorkerEventAddComponent } from "../worker/worker-details/worker-event-add/worker-event-add.component";
 import { WorkerAddComponent } from "../worker/worker-add/worker-add.component";
 import { AuthGuard } from "../auth/authgaurd.service";
+import { TestComponent } from "../test/test.component";
 
 
 const appRoutes : Routes = [
@@ -25,6 +26,7 @@ const appRoutes : Routes = [
     },
     { path: 'signup', component : SignupComponent},
     { path: 'signin', component : SigninComponent},
+    { path: 'test', component : TestComponent},
     { path : '', redirectTo: '/signin', pathMatch:'full'}
 ];
 

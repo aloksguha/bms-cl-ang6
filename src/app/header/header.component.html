@@ -1,22 +1,31 @@
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a style="cursor: pointer;" class="navbar-brand">BMS</a>
-    </div>
+<nav class="navbar navbar-expand-md py-0 navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" routerLink="/">BMS</a>
 
-    
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <!-- <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
 
-    <ul class="nav navbar-nav navbar-right">
-      <ng-template [ngIf]="!authService.isAuthenticated()">
-        <li routerLinkActive="active"><a routerLink="/signup">Register</a></li>
-        <li routerLinkActive="active"><a routerLink="/signin">Sign-in</a></li>
-    </ng-template>
-    <li routerLinkActive="active" *ngIf="authService.isAuthenticated()">
-      <a style="cursor: pointer;" (click)="onlogout()">Logout</a>
-    </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li> -->
+     </ul>
+   </div>   
 
-      </ul>
-  </div>
- </nav>
+   <ul class="navbar-nav mr-auto">
+    <ng-template [ngIf]="!authService.isAuthenticated()">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/signup">Register</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a  class="nav-link" routerLink="/signin">Sign-in</a>
+      </li>
+  </ng-template>
+  <li routerLinkActive="active" *ngIf="authService.isAuthenticated()">
+    <a class="nav-link" (click)="onlogout()">Logout</a>
+  </li>
+   </ul>
+</nav>
 
 

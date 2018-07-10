@@ -26,6 +26,7 @@ import { ToasterService } from './shared/toaster.service';
 import { WorkerAddComponent } from './worker/worker-add/worker-add.component';
 import { DataStorageService } from './shared/datastorage.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     WorkerListComponent,
     WorkerCardComponent,
     WorkerEventAddComponent,
-    WorkerAddComponent
+    WorkerAddComponent,
+    TestComponent
+    
   ],
   imports: [
     BrowserModule,

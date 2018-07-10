@@ -1,26 +1,19 @@
-<form  (ngSubmit)="onAddItem(f)" #f="ngForm">
-  <div class="row">  
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <input type="text" class="form-control" name="dt"
-          ngModel 
-          required
-          disabled>  
-        </div>
+<div class="row">
+  <form (ngSubmit)="onAddItem(f)" #f="ngForm">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+      <input type="text" class="form-control" name="dt" ngModel required disabled>
+    </div>
 
-       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-          <input type="radio" id="attdntrue"
-          name="attdn" value="true"  ngModel 
-          required>
-         <label for="contactChoice1"> &nbsp;Present</label>
-          &nbsp;
-         <input type="radio" id="attdnfalse"
-          name="attdn" value="false"  ngModel 
-          required> &nbsp;
-         <label for="contactChoice2"> &nbsp;Absent</label>
-       </div>
-       <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-         <button type="submit" class="btn btn-success">Add</button>
-         <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
-       </div>
-  </div>
-</form>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <input type="radio" id="attdntrue" name="attdn" value="true" ngModel required>
+      <label for="contactChoice1"> &nbsp;Present</label>
+      &nbsp;
+      <input type="radio" id="attdnfalse" name="attdn" value="false" ngModel required> &nbsp;
+      <label for="contactChoice2"> &nbsp;Absent</label>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <button type="submit" class="btn btn-success">Add</button>
+      <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>
