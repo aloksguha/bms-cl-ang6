@@ -66,6 +66,32 @@ export class AuthService {
         );
     }
 
+    signinfromgoogleAccount(){
+        return firebase.auth().signInWithPopup(
+            new firebase.auth.GoogleAuthProvider()
+        ).then( (success) => {
+            this.spinner.hideSpinner();
+            this.router.navigate(['/hw']);
+            console.log('success of signin');
+            console.log(success);
+            this.tstService.showToasterMessage('INFO','User Authenticated Successfully',"User Authenticated");
+            this.spinner.hideSpinner();
+            firebase.auth().currentUser.getIdToken()
+            .then(
+                (newtoken: string) => {
+                    this.token = newtoken;
+                }
+            );
+        })
+        .catch(
+            (error) => {
+                this.spinner.hideSpinner();
+                this.tstService.showToasterMessage('ERROR',error.message,"Invalid Credientials");
+            }
+        );
+
+    }
+
     getToken(){
          firebase.auth().currentUser.getIdToken()
         .then(

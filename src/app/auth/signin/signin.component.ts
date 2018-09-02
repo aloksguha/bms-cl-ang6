@@ -27,6 +27,10 @@ export class SigninComponent implements OnInit, OnDestroy {
     }
   }
 
+  onLoginWithGoogle(){
+    this.authservice.signinfromgoogleAccount();
+  }
+
   onSigninAsTestUser(){
     this.authservice.signinAsTestUser();
   }
