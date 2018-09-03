@@ -48,13 +48,13 @@ export class WorkerDetailsComponent implements OnInit, OnDestroy {
   id: string;
   eventsSubscription: Subscription;
   paramSubscription: Subscription;
-  selectedWorker: HomeWorker;
+
   view: string = 'month';
   viewDate: Date = new Date();
   localeventSubject = new BehaviorSubject<any>([]);
   events$: Observable<Array<CalendarEvent<any>>>;
   activeDayIsOpen = false;
-  eventsOnDay : any[] = [];
+  eventsOnDay: any[] = [];
   selectedDate;
 
   sample: any = {
@@ -73,7 +73,6 @@ export class WorkerDetailsComponent implements OnInit, OnDestroy {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    console.log('initializing detail component')
     this.paramSubscription = this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
@@ -93,23 +92,17 @@ export class WorkerDetailsComponent implements OnInit, OnDestroy {
           color: val.status ? colors.green : colors.red,
           cssClass: 'eventcursor',
           draggable: false
-        }
+        };
         this.events$.pipe(take(1)).subscribe(
           (vals) => {
             console.log(vals);
             const newArr = [...vals, calEvent];
             this.localeventSubject.next(newArr);
-          })
+          });
       }
     );
   }
 
-  openModel(content){
-    console.log('clicked');
-    this.modalService.open(content);
-
-
-  }
 
   onDayClick({ date, events }: { date: Date; events: CalendarEvent[] }, content: any): void {
     console.log(date);

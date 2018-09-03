@@ -9,11 +9,16 @@
       <div *ngFor="let evnt of eventsOnDay">
         {{evnt.id}} {{evnt.title}}
       </div>
-      <!-- <app-worker-event-add onDate="selectedDate"></app-worker-event-add> -->
+      
+      <div class="container">
+        <app-worker-event-add [onDate]=selectedDate [workerid]=id></app-worker-event-add>
+      </div>
+      
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
   </div>
+
 </ng-template>
 
 <div class="row text-center">
@@ -100,7 +105,8 @@
       [viewDate]="viewDate"
       [events]="events"
       [dayStartHour]="6"
-      [dayEndHour]="20">
+      [dayEndHour]="20"
+      >
     </mwl-calendar-day-view>
   </div>
 

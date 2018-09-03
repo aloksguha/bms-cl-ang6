@@ -12,50 +12,51 @@ import { DataStorageService } from '../../../shared/datastorage.service';
 })
 export class WorkerEventAddComponent implements OnInit, AfterViewInit, OnDestroy{
   @Input() onDate;
+  @Input() workerid;
   @ViewChild('f') slForm: NgForm;
   eventData : any;
   constructor(private service: WorkerService,
     private router: Router,
-    private route : ActivatedRoute,
-    private dataService : DataStorageService) { }
+    private route: ActivatedRoute,
+    private dataService: DataStorageService) { }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
       console.log('WorkerEventAddComponent destroyed..');
     }
-    ngAfterViewInit(){
+    ngAfterViewInit() {
       //this.initForm();
     }
     ngOnInit() {
-      console.log(this.onDate)
-      
-      // this.service.selectedDate.subscribe(
-      //   (data:any) => {
-      //     console.log(data);
-      //     this.eventData = data;
-      //     this.initForm();
-      //   });
+      console.log('WorkerEventAddComponent = '+this.onDate);
+      console.log('workerid = '+this.workerid);
+      this.service.workersSubject.subscribe(
+        (data: any) => {
+          console.log(data);
+          this.eventData = data;
+          // this.initForm();
+        });
   }
 
-  initForm(){
+  initForm() {
       this.slForm.setValue({
         dt : this.onDate,
-        attdn : "true"
+        attdn : 'true'
       });
   }
 
 
 
 
-  onAddItem(form : NgForm){
+  onAddItem(form: NgForm) {
     const val = form.value;
-    let attdendc = val.attdn === "true" ? true : false;
+    const attdendc = val.attdn === 'true' ? true : false;
     console.log(val.dt);
    // this.service.addEvent(this.eventData.selectedWorker, new Attendance(null, attdendc, new Date(this.eventData.day.date)));
-    this.dataService.saveEvent(this.eventData.selectedWorker, new Attendance(null, attdendc, new Date(this.eventData.day.date)))
+    this.dataService.saveEvent(this.workerid, new Attendance(null, attdendc, new Date(this.onDate)));
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 
-  onCancel(){
+  onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route});
   }
 

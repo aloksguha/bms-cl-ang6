@@ -11,12 +11,12 @@ import { DataStorageService } from '../../shared/datastorage.service';
   styleUrls: ['./worker-list.component.css']
 })
 export class WorkerListComponent implements OnInit {
-  workersSub : Subscription;
-  homeworkers : HomeWorker[] = [];
+  workersSub: Subscription;
+  homeworkers: HomeWorker[] = [];
   constructor(private service: WorkerService,
               private router: Router,
-              private route : ActivatedRoute,
-              private dataservice : DataStorageService) { }
+              private route: ActivatedRoute,
+              private dataservice: DataStorageService) { }
 
   ngOnInit() {
     this.dataservice.getWorkers();
